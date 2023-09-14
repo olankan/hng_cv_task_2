@@ -3,9 +3,8 @@
 import 'package:flutter/material.dart';
 
 class InfoTextField extends StatelessWidget {
-  InfoTextField({required this.textHint, required this.controller});
+  InfoTextField({required this.controller});
 
-  late String textHint;
   final TextEditingController controller;
   // String inputtedText = 'ola';
 
@@ -20,20 +19,11 @@ class InfoTextField extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
-        // onSubmitted: (value) {
-        //   inputtedText = value;
-        //   print(inputtedText);
-        // },
         cursorColor: Color(0xFFA0D7F1),
         textAlign: TextAlign.left,
         style: TextStyle(
             color: Colors.white, fontWeight: FontWeight.w300, fontSize: 14),
         decoration: InputDecoration(
-          hintText: textHint,
-          hintStyle: TextStyle(
-              fontSize: 12,
-              color: Color.fromARGB(255, 160, 215, 241),
-              fontWeight: FontWeight.w300),
           contentPadding: EdgeInsets.fromLTRB(10, 14, 5, 13),
           border: InputBorder.none,
           fillColor: Color(0xff37a1f4),
@@ -58,9 +48,9 @@ class InfoTextField extends StatelessWidget {
 }
 
 class AboutMeTextField extends StatelessWidget {
-  AboutMeTextField({required this.textHint, required this.controller});
+  AboutMeTextField({required this.controller});
 
-  late String textHint;
+
   final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
@@ -75,11 +65,8 @@ class AboutMeTextField extends StatelessWidget {
         style: TextStyle(
             color: Colors.white, fontWeight: FontWeight.w300, fontSize: 14),
         decoration: InputDecoration(
-          hintText: textHint,
-          hintStyle: TextStyle(
-              fontSize: 12,
-              color: Color.fromARGB(255, 160, 215, 241),
-              fontWeight: FontWeight.w300),
+      
+        
           contentPadding: EdgeInsets.fromLTRB(10, 0, 5, 13),
           border: InputBorder.none,
           fillColor: Color(0xff37a1f4),

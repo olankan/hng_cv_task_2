@@ -1,4 +1,5 @@
-import 'package:cv_task_2/screens/homeScreen.dart';
+import 'package:cv_task_2/notUsedForNow/homeScreen.dart';
+import 'package:cv_task_2/screens/profilePage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomePage()
+      home: ProfilePage()
     );
   }
 }
