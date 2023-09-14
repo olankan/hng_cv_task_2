@@ -1,12 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_key_in_widget_constructors, must_be_immutable
-import 'dart:ui' as ui;
+
 import 'package:cv_task_2/models/customClipperPath.dart';
 import 'package:cv_task_2/models/screenToggles.dart';
 import 'package:cv_task_2/screens/editProfilePage.dart';
 import 'package:flutter/material.dart';
-
-// EditProfileScreen editProfileScreen = EditProfileScreen();
-
 class ProfilePage extends StatefulWidget {
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -18,119 +15,123 @@ class _ProfilePageState extends State<ProfilePage> {
   String githubHandle = "@Olankan";
   String aboutMe =
       '''I'm Olankan, a skilled Flutter developer holding a Bachelor's degree in Computer Science. My home is in vibrant Lagos, Nigeria. When I'm not immersed in coding, I'm often lost in the world of music, playing the sax, or scoring baskets on the basketball court.''';
-  Color activeColor = Colors.blue;
+  Color activeColor = Color(0xFF2196F3);
   Color inActiveColor = Color(0xFFA0D7F1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFD5F2FF),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
         children: [
-          ScreenToggle(
-              color2: Colors.transparent,
-              color1: Colors.blue,
-              elevation: 0,
-              onTap: () {}),
-          SizedBox(
-            height: 50,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 0),
-            child: Center(
-              child: CircleAvatar(
-                radius: 60,
-                child: Text(
-                  'CV',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 50,
-                      fontWeight: FontWeight.w300),
-                ),
-                backgroundColor: Colors.blue,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ScreenToggle(
+                  color2: Colors.transparent,
+                  color1: Color(0xFF2196F3),
+                  elevation: 0,
+                  onTap: () {}),
+              SizedBox(
+                height: 70,
               ),
-            ),
-          ),
-          Expanded(
-            child: CustomPaint(
-              size: Size(
-                  392.7,
-                  (392.7 * 0.5013404825737265)
-                      .toDouble()), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-              painter: RPSCustomPainter(),
-
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
-                  color: Colors.blue,
-                ),
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      bottom: 0, left: 20, right: 20, top: 20),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        infoTitle('Full Name'),
-                        SizedBox(height: 5),
-                        infoText('$fullName'),
-                        SizedBox(height: 10),
-                        infoTitle('Slack Handle'),
-                        SizedBox(height: 5),
-                        infoText('$slackHandle'),
-                        SizedBox(height: 10),
-                        infoTitle('Github Handle'),
-                        SizedBox(height: 5),
-                        infoText('$githubHandle'),
-                        SizedBox(height: 10),
-                        infoTitle('About Me'),
-                        SizedBox(height: 5),
-                        aboutMeInfoText('$aboutMe'),
-                        SizedBox(height: 10),
-                        ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Color(0xff1769aa))),
-                          onPressed: () async {
-                            final updatedInfo = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EditProfileScreen(
-                                  fullName: fullName,
-                                  slackHandle: slackHandle,
-                                  githubHandle: githubHandle,
-                                  aboutMe: aboutMe,
-                                ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20)),
+                      // color: Color(0xFFD5F2FF),
+                      color: Color(0xFFD5F2FF)),
+                  width: double.infinity,
+                  child: CustomPaint(
+                    size: Size(392, (392 * 0.5013404825737265).toDouble()),
+                    painter: RPSCustomPainter(),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 0, left: 20, right: 20, top: 100),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            infoTitle('Full Name'),
+                            SizedBox(height: 5),
+                            infoText('$fullName'),
+                            SizedBox(height: 10),
+                            infoTitle('Slack Handle'),
+                            SizedBox(height: 5),
+                            infoText('$slackHandle'),
+                            SizedBox(height: 10),
+                            infoTitle('Github Handle'),
+                            SizedBox(height: 5),
+                            infoText('$githubHandle'),
+                            SizedBox(height: 10),
+                            infoTitle('About Me'),
+                            SizedBox(height: 5),
+                            aboutMeInfoText('$aboutMe'),
+                            SizedBox(height: 10),
+                            ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Color(0xff1769aa))),
+                              onPressed: () async {
+                                final updatedInfo = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EditProfileScreen(
+                                      fullName: fullName,
+                                      slackHandle: slackHandle,
+                                      githubHandle: githubHandle,
+                                      aboutMe: aboutMe,
+                                    ),
+                                  ),
+                                );
+                                if (updatedInfo != null) {
+                                  setState(() {
+                                    fullName = updatedInfo['fullName'];
+                                    slackHandle = updatedInfo['slackHandle'];
+                                    githubHandle = updatedInfo['githubHandle'];
+                                    aboutMe = updatedInfo['aboutMe'];
+                                  });
+                                }
+                              },
+                              child: Text(
+                                'Click to Edit',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 14),
                               ),
-                            );
-                            if (updatedInfo != null) {
-                              setState(() {
-                                fullName = updatedInfo['fullName'];
-                                slackHandle = updatedInfo['slackHandle'];
-                                githubHandle = updatedInfo['githubHandle'];
-                                aboutMe = updatedInfo['aboutMe'];
-                              });
-                            }
-                          },
-                          child: Text(
-                            'Click to Edit',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 14),
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
+          Positioned(
+            top: 100,
+            left: 135,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 0),
+              child: Center(
+                child: CircleAvatar(
+                  radius: 60,
+                  child: Text(
+                    'CV',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 50,
+                        fontWeight: FontWeight.w300),
+                  ),
+                  backgroundColor: Colors.blue,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

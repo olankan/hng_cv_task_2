@@ -1,5 +1,6 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:cv_task_2/models/customClipperPath.dart';
 import 'package:cv_task_2/models/infoTextField.dart';
 import 'package:cv_task_2/models/screenToggles.dart';
 import 'package:flutter/material.dart';
@@ -42,88 +43,98 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFD5F2FF),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
         children: [
-          ScreenToggle(
-              color1: Colors.transparent,
-              color2: Colors.blue,
-              elevation: 0,
-              onTap: null),
-          SizedBox(
-            height: 50,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 0.0),
-            child: Center(
-              child: CircleAvatar(
-                radius: 60,
-                child: Text(
-                  'CV',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 50,
-                      fontWeight: FontWeight.w300),
-                ),
-                backgroundColor: Colors.blue,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ScreenToggle(
+                  color1: Colors.transparent,
+                  color2: Colors.blue,
+                  elevation: 0,
+                  onTap: null),
+              SizedBox(
+                height: 70,
               ),
-            ),
-          ),
-          Expanded(
-            child: ClipPath(
-              // clipper: ,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
-                  color: Colors.blue,
-                ),
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom:0, left: 20, right: 20, top: 20),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        infoTitle('Full Name'),
-                        SizedBox(height: 5),
-                        InfoTextField(
-                          controller: fullNameController,
+              Expanded(
+                child: CustomPaint(
+                  size: Size(392, (392 * 0.5013404825737265).toDouble()),
+                  painter: RPSCustomPainter(),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20)),
+                      // color: Colors.blue,
+                    ),
+                    width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 0, left: 20, right: 20, top: 100),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            infoTitle('Full Name'),
+                            SizedBox(height: 5),
+                            InfoTextField(
+                              controller: fullNameController,
+                            ),
+                            SizedBox(height: 10),
+                            infoTitle('Slack Handle'),
+                            SizedBox(height: 5),
+                            InfoTextField(
+                              controller: slackHandleController,
+                            ),
+                            SizedBox(height: 10),
+                            infoTitle('Github Handle'),
+                            SizedBox(height: 5),
+                            InfoTextField(
+                              controller: githubHandleController,
+                            ),
+                            SizedBox(height: 10),
+                            infoTitle('About Me'),
+                            SizedBox(height: 5),
+                            AboutMeTextField(
+                              controller: aboutMeController,
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            SaveButton(
+                                fullNameController: fullNameController,
+                                slackHandleController: slackHandleController,
+                                githubHandleController: githubHandleController,
+                                aboutMeController: aboutMeController)
+                          ],
                         ),
-                        SizedBox(height: 10),
-                        infoTitle('Slack Handle'),
-                        SizedBox(height: 5),
-                        InfoTextField(
-                          controller: slackHandleController,
-                        ),
-                        SizedBox(height: 10),
-                        infoTitle('Github Handle'),
-                        SizedBox(height: 5),
-                        InfoTextField(
-                          controller: githubHandleController,
-                        ),
-                        SizedBox(height: 10),
-                        infoTitle('About Me'),
-                        SizedBox(height: 5),
-                        AboutMeTextField(
-                          controller: aboutMeController,
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        SaveButton(
-                            fullNameController: fullNameController,
-                            slackHandleController: slackHandleController,
-                            githubHandleController: githubHandleController,
-                            aboutMeController: aboutMeController)
-                      ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
+          Positioned(
+            top: 100,
+            left: 135,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 0),
+              child: Center(
+                child: CircleAvatar(
+                  radius: 60,
+                  child: Text(
+                    'CV',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 50,
+                        fontWeight: FontWeight.w300),
+                  ),
+                  backgroundColor: Colors.blue,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
