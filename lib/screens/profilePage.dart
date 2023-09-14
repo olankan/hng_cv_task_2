@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_key_in_widget_constructors, must_be_immutable
-
+import 'dart:ui' as ui;
+import 'package:cv_task_2/models/customClipperPath.dart';
+import 'package:cv_task_2/models/screenToggles.dart';
 import 'package:cv_task_2/screens/editProfilePage.dart';
 import 'package:flutter/material.dart';
 
@@ -12,30 +14,27 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   String fullName = "Olankan Odeyemi";
-
   String slackHandle = "@Olankan Odeyemi";
-
   String githubHandle = "@Olankan";
-
   String aboutMe =
       '''I'm Olankan, a skilled Flutter developer holding a Bachelor's degree in Computer Science. My home is in vibrant Lagos, Nigeria. When I'm not immersed in coding, I'm often lost in the world of music, playing the sax, or scoring baskets on the basketball court.''';
-
+  Color activeColor = Colors.blue;
+  Color inActiveColor = Color(0xFFA0D7F1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFD5F2FF),
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 213, 242, 255),
-        title: Center(
-            child: Text(
-          'Profile',
-          style: TextStyle(
-              color: Colors.blue, fontWeight: FontWeight.w500, fontSize: 25),
-        )),
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          ScreenToggle(
+              color2: Colors.transparent,
+              color1: Colors.blue,
+              elevation: 0,
+              onTap: () {}),
+          SizedBox(
+            height: 50,
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 0),
             child: Center(
@@ -53,8 +52,13 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           Expanded(
-            child: ClipPath(
-              // clipper: ,
+            child: CustomPaint(
+              size: Size(
+                  392.7,
+                  (392.7 * 0.5013404825737265)
+                      .toDouble()), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
+              painter: RPSCustomPainter(),
+
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -64,61 +68,64 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 width: double.infinity,
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      infoTitle('Full Name'),
-                      SizedBox(height: 5),
-                      infoText('$fullName'),
-                      SizedBox(height: 10),
-                      infoTitle('Slack Handle'),
-                      SizedBox(height: 5),
-                      infoText('$slackHandle'),
-                      SizedBox(height: 10),
-                      infoTitle('Github Handle'),
-                      SizedBox(height: 5),
-                      infoText('$githubHandle'),
-                      SizedBox(height: 10),
-                      infoTitle('About Me'),
-                      SizedBox(height: 5),
-                      aboutMeInfoText('$aboutMe'),
-                      SizedBox(height: 10),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Color(0xff1769aa))),
-                        onPressed: () async {
-                          final updatedInfo = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EditProfileScreen(
-                                fullName: fullName,
-                                slackHandle: slackHandle,
-                                githubHandle: githubHandle,
-                                aboutMe: aboutMe,
+                  padding: const EdgeInsets.only(
+                      bottom: 0, left: 20, right: 20, top: 20),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        infoTitle('Full Name'),
+                        SizedBox(height: 5),
+                        infoText('$fullName'),
+                        SizedBox(height: 10),
+                        infoTitle('Slack Handle'),
+                        SizedBox(height: 5),
+                        infoText('$slackHandle'),
+                        SizedBox(height: 10),
+                        infoTitle('Github Handle'),
+                        SizedBox(height: 5),
+                        infoText('$githubHandle'),
+                        SizedBox(height: 10),
+                        infoTitle('About Me'),
+                        SizedBox(height: 5),
+                        aboutMeInfoText('$aboutMe'),
+                        SizedBox(height: 10),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Color(0xff1769aa))),
+                          onPressed: () async {
+                            final updatedInfo = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditProfileScreen(
+                                  fullName: fullName,
+                                  slackHandle: slackHandle,
+                                  githubHandle: githubHandle,
+                                  aboutMe: aboutMe,
+                                ),
                               ),
-                            ),
-                          );
-                          if (updatedInfo != null) {
-                            setState(() {
-                              fullName = updatedInfo['fullName'];
-                              slackHandle = updatedInfo['slackHandle'];
-                              githubHandle = updatedInfo['githubHandle'];
-                              aboutMe = updatedInfo['aboutMe'];
-                            });
-                          }
-                        },
-                        child: Text(
-                          'Click to Edit',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w300,
-                              fontSize: 14),
+                            );
+                            if (updatedInfo != null) {
+                              setState(() {
+                                fullName = updatedInfo['fullName'];
+                                slackHandle = updatedInfo['slackHandle'];
+                                githubHandle = updatedInfo['githubHandle'];
+                                aboutMe = updatedInfo['aboutMe'];
+                              });
+                            }
+                          },
+                          child: Text(
+                            'Click to Edit',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 14),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -160,7 +167,6 @@ Container infoText(String input) {
 
 Container aboutMeInfoText(String input) {
   return Container(
-    // height: 250,
     width: 300,
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8), color: Color(0xff37a1f4)),

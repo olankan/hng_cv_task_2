@@ -1,6 +1,7 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:cv_task_2/models/infoTextField.dart';
+import 'package:cv_task_2/models/screenToggles.dart';
 import 'package:flutter/material.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -21,6 +22,8 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  Color activeColor = Colors.blue;
+  Color inActiveColor = Color(0xFFA0D7F1);
   TextEditingController fullNameController = TextEditingController();
   TextEditingController slackHandleController = TextEditingController();
   TextEditingController githubHandleController = TextEditingController();
@@ -39,21 +42,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFD5F2FF),
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 213, 242, 255),
-        title: Center(
-            child: Padding(
-          padding: const EdgeInsets.only(left: 0),
-          child: Text(
-            'Edit Profile',
-            style: TextStyle(
-                color: Colors.blue, fontWeight: FontWeight.w500, fontSize: 25),
-          ),
-        )),
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          ScreenToggle(
+              color1: Colors.transparent,
+              color2: Colors.blue,
+              elevation: 0,
+              onTap: null),
+          SizedBox(
+            height: 50,
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 0.0),
             child: Center(
@@ -82,7 +81,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
                 width: double.infinity,
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.only(bottom:0, left: 20, right: 20, top: 20),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,7 +109,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         AboutMeTextField(
                           controller: aboutMeController,
                         ),
-                        SizedBox(height: 5,),
+                        SizedBox(
+                          height: 5,
+                        ),
                         SaveButton(
                             fullNameController: fullNameController,
                             slackHandleController: slackHandleController,

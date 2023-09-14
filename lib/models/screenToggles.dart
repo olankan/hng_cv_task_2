@@ -3,12 +3,12 @@ import 'package:cv_task_2/screens/editProfilePage.dart';
 import 'package:flutter/material.dart';
 
 class ScreenToggle extends StatelessWidget {
-  ScreenToggle({required this.isClicked, required this.onToggled});
+  ScreenToggle(
+      {required this.color1, required this.color2, required this.elevation, required this.onTap});
 
-  late Function onToggled;
-  late bool isClicked;
-  Color activeColor = Colors.blue;
-  Color inActiveColor = Color(0xFFA0D7F1);
+  Color color1;  Color color2; 
+  double elevation;
+  Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,27 +17,22 @@ class ScreenToggle extends StatelessWidget {
         height: 50,
         width: MediaQuery.of(context).size.width - 40,
         decoration: BoxDecoration(
-          color: inActiveColor,
+          color: Color(0xFFA0D7F1),
           borderRadius: BorderRadius.circular(22),
         ),
         child: Row(
           children: [
             GestureDetector(
-              onTap: isClicked == true
-                  ? () {
-                      onToggled(!isClicked);
-                    }
-                  : null,
+              onTap: onTap,
               child: Material(
-                elevation: isClicked == true ? 0 : 5,
+                elevation: elevation,
                 borderRadius: BorderRadius.circular(22),
                 color: Colors.transparent,
                 child: Container(
                   height: 50,
                   width: MediaQuery.of(context).size.width - 216.4,
                   decoration: BoxDecoration(
-                    color:
-                        isClicked == false ? activeColor : Colors.transparent,
+                    color: color1,
                     borderRadius: BorderRadius.circular(22),
                   ),
                   child: Center(
@@ -52,21 +47,16 @@ class ScreenToggle extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: isClicked == false
-                  ? () {
-                      onToggled(!isClicked);
-                    }
-                  : null,
+              onTap: onTap,
               child: Material(
-                elevation: isClicked == true ? 5 : 0,
+                elevation: elevation,
                 borderRadius: BorderRadius.circular(22),
                 color: Colors.transparent,
                 child: Container(
                   height: 50,
                   width: MediaQuery.of(context).size.width - 216.35,
                   decoration: BoxDecoration(
-                    color:
-                        isClicked == false ? Colors.transparent : activeColor,
+                    color: color2,
                     borderRadius: BorderRadius.circular(22),
                   ),
                   child: Center(
