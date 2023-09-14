@@ -1,18 +1,40 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_literals_to_create_immutables, prefer_const_constructors
+
+
 import 'package:cv_task_2/models/infoTextField.dart';
 import 'package:flutter/material.dart';
 
-InfoTextField infoTextField = InfoTextField(textHint: '');
-
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+  final String fullName;
+  final String slackHandle;
+  final String githubHandle;
+  final String aboutMe;
+
+  const EditProfileScreen({
+    required this.fullName,
+    required this.slackHandle,
+    required this.githubHandle,
+    required this.aboutMe,
+  });
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  String fullName = '';
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController slackHandleController = TextEditingController();
+  TextEditingController githubHandleController = TextEditingController();
+  TextEditingController aboutMeController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    fullNameController.text = widget.fullName;
+    slackHandleController.text = widget.slackHandle;
+    githubHandleController.text = widget.githubHandle;
+    aboutMeController.text = widget.aboutMe;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,20 +78,30 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       SizedBox(height: 5),
                       InfoTextField(
                         textHint: 'Your Name',
+                        controller: fullNameController,
                       ),
-                      Text(infoTextField.inputtedText),
                       SizedBox(height: 10),
                       infoTitle('Slack Handle'),
                       SizedBox(height: 5),
-                      InfoTextField(textHint: 'Your Slack Handle'),
+                      InfoTextField(
+                        textHint: 'Your Slack Handle',
+                        controller: slackHandleController,
+                      ),
                       SizedBox(height: 10),
                       infoTitle('Github Handle'),
                       SizedBox(height: 5),
-                      InfoTextField(textHint: 'Your Github Handle'),
+                      InfoTextField(
+                        textHint: 'Your Github Handle',
+                        controller: githubHandleController,
+                      ),
                       SizedBox(height: 10),
                       infoTitle('About Me'),
                       SizedBox(height: 5),
-                      AboutMeTextField(textHint: 'Your Biography')
+                      AboutMeTextField(
+                        textHint: 'Your Biography',
+                        controller: aboutMeController,
+                      ),
+                      SaveButton(fullNameController: fullNameController, slackHandleController: slackHandleController, githubHandleController: githubHandleController, aboutMeController: aboutMeController)
                     ],
                   ),
                 ),
@@ -78,6 +110,53 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class SaveButton extends StatelessWidget {
+  const SaveButton({
+    super.key,
+    required this.fullNameController,
+    required this.slackHandleController,
+    required this.githubHandleController,
+    required this.aboutMeController,
+  });
+
+  final TextEditingController fullNameController;
+  final TextEditingController slackHandleController;
+  final TextEditingController githubHandleController;
+  final TextEditingController aboutMeController;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context, {
+          'fullName': fullNameController.text,
+          'slackName': slackHandleController.text,
+          'githubHandle': githubHandleController.text,
+          'bio': aboutMeController.text,
+        });
+      },
+      child: Container(
+        height: 30,
+        width: 100,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: Colors.black),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0, top: 4),
+          child: Text(
+            'Save',
+            textAlign: TextAlign.left,
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w300,
+                fontSize: 14),
+          ),
+        ),
+      ),
     );
   }
 }

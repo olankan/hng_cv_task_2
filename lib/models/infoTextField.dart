@@ -3,11 +3,12 @@
 import 'package:flutter/material.dart';
 
 class InfoTextField extends StatelessWidget {
-  InfoTextField({required this.textHint});
+  InfoTextField({required this.textHint, required this.controller});
 
   late String textHint;
-  String inputtedText = 'ola';
-  final infoTextContoller = TextEditingController();
+  final TextEditingController controller;
+  // String inputtedText = 'ola';
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,11 +19,11 @@ class InfoTextField extends StatelessWidget {
         color: Color(0xff37a1f4),
       ),
       child: TextField(
-        controller: infoTextContoller,
-        onSubmitted: (value) {
-          inputtedText = value;
-          print(inputtedText);
-        },
+        controller: controller,
+        // onSubmitted: (value) {
+        //   inputtedText = value;
+        //   print(inputtedText);
+        // },
         cursorColor: Color(0xFFA0D7F1),
         textAlign: TextAlign.left,
         style: TextStyle(
@@ -57,10 +58,10 @@ class InfoTextField extends StatelessWidget {
 }
 
 class AboutMeTextField extends StatelessWidget {
-  AboutMeTextField({required this.textHint});
+  AboutMeTextField({required this.textHint, required this.controller});
 
   late String textHint;
-
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Container(

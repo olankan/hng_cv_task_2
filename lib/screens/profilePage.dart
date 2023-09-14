@@ -1,11 +1,15 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_key_in_widget_constructors, must_be_immutable
 
 import 'package:flutter/material.dart';
 
 // EditProfileScreen editProfileScreen = EditProfileScreen();
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  String fullName = "Olankan Odeyemi";
+  String slackHandle = "@Olankan Odeyemi";
+  String githubHandle = "@Olankan";
+  String aboutMe =
+      '''I'm Olankan, a skilled Flutter developer holding a Bachelor's degree in Computer Science. My home is in vibrant Lagos, Nigeria. When I'm not immersed in coding, I'm often lost in the world of music, playing the sax, or scoring baskets on the basketball court.''';
 
   @override
   Widget build(BuildContext context) {
@@ -46,20 +50,19 @@ class ProfilePage extends StatelessWidget {
                   children: [
                     infoTitle('Full Name'),
                     SizedBox(height: 5),
-                    infoText('Olankan Odeyemi'),
+                    infoText('$fullName'),
                     SizedBox(height: 10),
                     infoTitle('Slack Handle'),
                     SizedBox(height: 5),
-                    infoText('@Olankan Odeyemi'),
+                    infoText('$slackHandle'),
                     SizedBox(height: 10),
                     infoTitle('Github Handle'),
                     SizedBox(height: 5),
-                    infoText('@Olankan'),
+                    infoText('$githubHandle'),
                     SizedBox(height: 10),
                     infoTitle('About Me'),
                     SizedBox(height: 5),
-                    aboutMeInfoText(
-                        '''I'm Olankan, a skilled Flutter developer holding a Bachelor's degree in Computer Science. My home is in vibrant Lagos, Nigeria. When I'm not immersed in coding, I'm often lost in the world of music, playing the sax, or scoring baskets on the basketball court.''')
+                    aboutMeInfoText('$aboutMe')
                   ],
                 ),
               ),
@@ -113,7 +116,6 @@ Container aboutMeInfoText(String input) {
         style: TextStyle(
             wordSpacing: -1,
             color: Colors.white,
-
             inherit: true,
             fontWeight: FontWeight.w300,
             fontSize: 14),
