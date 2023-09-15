@@ -4,6 +4,7 @@ import 'package:cv_task_2/models/customClipperPath.dart';
 import 'package:cv_task_2/models/screenToggles.dart';
 import 'package:cv_task_2/screens/editProfilePage.dart';
 import 'package:flutter/material.dart';
+
 class ProfilePage extends StatefulWidget {
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -26,13 +27,14 @@ class _ProfilePageState extends State<ProfilePage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 20),
               ScreenToggle(
                   color2: Colors.transparent,
-                  color1: Color(0xFF2196F3),
+                  color1: activeColor,
                   elevation: 0,
                   onTap: () {}),
               SizedBox(
-                height: 70,
+                height: 170,
               ),
               Expanded(
                 child: Container(
@@ -40,15 +42,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20)),
-                      // color: Color(0xFFD5F2FF),
+                     
                       color: Color(0xFFD5F2FF)),
                   width: double.infinity,
                   child: CustomPaint(
-                    size: Size(392, (392 * 0.5013404825737265).toDouble()),
+                    size: Size(double.infinity, (double.infinity * 0.5013404825737265).toDouble()),
                     painter: RPSCustomPainter(),
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          bottom: 0, left: 20, right: 20, top: 100),
+                          bottom: 0, left: 20, right: 20, top: 60),
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,25 +115,24 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
           Positioned(
-            top: 100,
-            left: 135,
+            top: MediaQuery.of(context).size.height/ 3.8,
+            left: MediaQuery.of(context).size.width/ 2.9,
+            // right: ,
             child: Padding(
               padding: const EdgeInsets.only(top: 0),
-              child: Center(
-                child: CircleAvatar(
-                  radius: 60,
-                  child: Text(
-                    'CV',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 50,
-                        fontWeight: FontWeight.w300),
-                  ),
-                  backgroundColor: Colors.blue,
+              child: CircleAvatar(
+                radius: 60,
+                child: Text(
+                  'CV',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 50,
+                      fontWeight: FontWeight.w300),
                 ),
+                backgroundColor: activeColor,
               ),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -54,7 +54,7 @@ class AboutMeTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 165,
       width: 300,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8), color: Color(0xff37a1f4)),

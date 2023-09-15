@@ -48,29 +48,30 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 20),
               ScreenToggle(
                   color1: Colors.transparent,
-                  color2: Colors.blue,
+                  color2: activeColor,
                   elevation: 0,
                   onTap: null),
               SizedBox(
-                height: 70,
+                height: 150,
               ),
               Expanded(
                 child: CustomPaint(
-                  size: Size(392, (392 * 0.5013404825737265).toDouble()),
+                  size: Size(double.infinity,
+                      (double.infinity * 0.5013404825737265).toDouble()),
                   painter: RPSCustomPainter(),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20)),
-                      // color: Colors.blue,
                     ),
                     width: double.infinity,
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          bottom: 0, left: 20, right: 20, top: 100),
+                          bottom: 0, left: 20, right: 20, top: 60),
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,8 +117,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ],
           ),
           Positioned(
-            top: 100,
-            left: 135,
+            top: MediaQuery.of(context).size.height / 4.15,
+            left: MediaQuery.of(context).size.width / 2.9,
             child: Padding(
               padding: const EdgeInsets.only(top: 0),
               child: Center(
@@ -182,8 +183,6 @@ Text infoTitle(String titleText) {
   return Text(
     titleText,
     style: TextStyle(
-        color: const Color.fromARGB(255, 184, 221, 238),
-        fontWeight: FontWeight.w700,
-        fontSize: 15),
+        color: Color(0xFFB8DDEE), fontWeight: FontWeight.w700, fontSize: 15),
   );
 }

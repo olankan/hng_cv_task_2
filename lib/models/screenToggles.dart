@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 
 class ScreenToggle extends StatelessWidget {
   ScreenToggle(
-      {required this.color1, required this.color2, required this.elevation, required this.onTap});
+      {required this.color1,
+      required this.color2,
+      required this.elevation,
+      required this.onTap});
 
-  Color color1;  Color color2; 
+  Color color1;
+  Color color2;
   double elevation;
   Function()? onTap;
   @override
@@ -30,7 +34,7 @@ class ScreenToggle extends StatelessWidget {
                 color: Colors.transparent,
                 child: Container(
                   height: 50,
-                  width: MediaQuery.of(context).size.width - 216.4,
+                  width: (MediaQuery.of(context).size.width - 40) / 2,
                   decoration: BoxDecoration(
                     color: color1,
                     borderRadius: BorderRadius.circular(22),
@@ -54,7 +58,7 @@ class ScreenToggle extends StatelessWidget {
                 color: Colors.transparent,
                 child: Container(
                   height: 50,
-                  width: MediaQuery.of(context).size.width - 216.35,
+                  width: (MediaQuery.of(context).size.width - 40) / 2,
                   decoration: BoxDecoration(
                     color: color2,
                     borderRadius: BorderRadius.circular(22),
